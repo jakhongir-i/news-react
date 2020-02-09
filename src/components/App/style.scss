@@ -1,0 +1,36 @@
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+//$color-1: #50627f;
+//$color-2: #5297ff;
+//$color-3: #a0c6ff;
+//$color-4: #2a4c7f;
+//$color-5: #809ecc;
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #2a4c7f;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 16px;
+}
+
+.main {
+  padding-top: 39px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
