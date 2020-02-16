@@ -2,37 +2,47 @@ import React, {Component} from 'react';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import './TopNews.scss';
-import {NewsApiConsumer} from "../Context";
+import withData from "../HOC-helpers/with-data";
+import NewsApi from "../../api/news-api";
+import NoPhoto from '../../no-image.gif'
+
+const newsApi = new NewsApi();
+
+const { getTopNews } = newsApi;
+
 
 class TopNews extends Component {
+
+
   render() {
-
-
-    const slides = [];
-    for (let i = 0; i <= 5; i++) {
-      slides.push(
-        <div key={i}>
-          <div className="top-news-card">
-            <img src="https://i.picsum.photos/id/2/500/300.jpg" alt="" className='top-news-card__image'/>
-            <p className='top-news-card__title'>BBOO Virus (.bboo File) – Removal and Recovery Guide</p>
-          </div>
-        </div>
-      )
-    }
 
     const params = {
       spaceBetween: 16,
-      slidesPerView: 'auto'
+      slidesPerView: 'auto',
+      rebuildOnUpdate: true,
+      lazy: true
     };
 
-    return (
 
+    const { data } = this.props;
+
+    return (
       <div className='top-news'>
         <h2>Top News</h2>
-        <div className='top-news__slider'>
 
+        <div className='top-news__slider'>
           <Swiper {...params}>
-            {slides}
+            { data.map((news, i) => {
+              return (
+                <div key={i}>
+                  <div className="top-news-card">
+                    <img src={news.urlToImage ? news.urlToImage : NoPhoto} alt="" className='top-news-card__image'/>
+                    <p className='top-news-card__title'>{news.title}</p>
+                  </div>
+                </div>
+                )
+              })
+            }
           </Swiper>
         </div>
       </div>
@@ -40,4 +50,4 @@ class TopNews extends Component {
   }
 }
 
-export default TopNews;
+export default withData(TopNews, getTopNews);

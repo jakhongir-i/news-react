@@ -22,7 +22,12 @@ export default class NewsApi {
   };
 
   getTopNews = async () => {
-    const res = await this.getResource(`/top-headlines?category=${this.getRandomCategory(this._mainCategories)}`)
+    const res = await this.getResource(`/top-headlines?country=us&category=${this.getRandomCategory(this._mainCategories)}`);
+    return res.articles;
+  };
+
+  getLatestNews = async (page) => {
+    const res = await this.getResource(`/everything?q=apple&sortBy=publishedAt&page=${page}`);
     return res.articles;
   }
 

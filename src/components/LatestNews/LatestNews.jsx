@@ -1,40 +1,58 @@
 import React, {Component} from 'react';
 import './LatestNews.scss'
+import NewsApi from "../../api/news-api";
+import withData from "../HOC-helpers/with-data";
+import moment from 'moment'
+import NoPhoto from '../../no-image.gif'
+import InfiniteScroll from "react-infinite-scroll-component";
+
+
+const newsApi = new NewsApi();
+const { getLatestNews } = newsApi;
 
 class LatestNews extends Component {
+
   render() {
 
-    const news = [];
-    for (let i = 0; i < 6; i++) {
-      news.push(
-        <li className='latest-news__list-item' key={i}>
-          <div className="latest-news-card">
-            <div className="latest-news-card__image">
-              <img src="https://i.picsum.photos/id/500/500/500.jpg" alt=""/>
-            </div>
-            <div className="latest-news-card__content">
-              <p className="latest-news-card__title">
-                New Microsoft Browser Combats Crypto Mining Malware
-              </p>
-              <div className="latest-news-card__bottom">
-                <span className="latest-news-card__date">02.02.2020</span>
-                <span className="latest-news-card__source">Bitcoinist.com</span>
-              </div>
-            </div>
-          </div>
-        </li>
-      )
-    }
+
+    const { data, fetchMoreData } = this.props;
 
     return (
       <div className='latest-news'>
         <h2>Latest News</h2>
         <ul className='latest-news__list'>
-          {news}
+
+        <InfiniteScroll
+          dataLength={data.length}
+          next={fetchMoreData}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {
+            data.map((item, i) => {
+              return (
+                <li className='latest-news__list-item' key={i}>
+                  <div className="latest-news-card">
+                    <div className="latest-news-card__image">
+                      <img src={item.urlToImage ? item.urlToImage : NoPhoto } alt="" />
+                    </div>
+                    <div className="latest-news-card__content">
+                      <p className="latest-news-card__title">{item.title}</p>
+                      <div className="latest-news-card__bottom">
+                        <span className="latest-news-card__date">{moment(item.publishedAt).format('DD.MM.YYYY')}</span>
+                        <span className="latest-news-card__source">{item.source.name}</span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              )
+            })
+          }
+        </InfiniteScroll>
         </ul>
       </div>
     );
   }
 }
 
-export default LatestNews;
+export default withData(LatestNews, getLatestNews);
