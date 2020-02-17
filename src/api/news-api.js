@@ -20,14 +20,14 @@ export default class NewsApi {
     }
     return await res.json();
   };
-
+    
   getTopNews = async () => {
     const res = await this.getResource(`/top-headlines?country=us&category=${this.getRandomCategory(this._mainCategories)}`);
     return res.articles;
   };
 
   getLatestNews = async (page) => {
-    const res = await this.getResource(`/everything?q=apple&sortBy=publishedAt&page=${page}`);
+    const res = await this.getResource(`/everything?q=apple&sortBy=publishedAt&page=${page}&pageSize=10`);
     return res.articles;
   }
 

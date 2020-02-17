@@ -5,6 +5,7 @@ import withData from "../HOC-helpers/with-data";
 import moment from 'moment'
 import NoPhoto from '../../no-image.gif'
 import InfiniteScroll from "react-infinite-scroll-component";
+import {ReactComponent as Spinner} from './spinner.svg'
 
 
 const newsApi = new NewsApi();
@@ -25,8 +26,13 @@ class LatestNews extends Component {
         <InfiniteScroll
           dataLength={data.length}
           next={fetchMoreData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
+          hasMore={(data.length + 20) <= 100}
+          loader={<Spinner />}
+          endMessage={
+          <p style={{textAlign: 'center'}}>
+            <b>Yay! You have seen it all</b>
+          </p>
+          }
         >
           {
             data.map((item, i) => {

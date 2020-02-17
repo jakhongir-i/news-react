@@ -10,16 +10,18 @@ const withData = (View, getData) => {
     };
 
     componentDidMount() {
+      this.fetchMoreData();
+    }
+
+
+    fetchMoreData = () => {
+      
       getData(this.state.page)
         .then((data) => {
-          console.log(data, this.state.page);
-
           this.setState(state => ({
             data: [...state.data, ...data],
             page: state.page + 1
           }))
-
-          console.log(data, this.state.page);
         });
     }
 
@@ -30,7 +32,7 @@ const withData = (View, getData) => {
         return  <h1>Data loading...</h1>
       }
 
-      return <View {...this.props} data={data} fetchMoreData={getData}/>;
+      return <View {...this.props} data={data} fetchMoreData={this.fetchMoreData}/>;
     }
   };
 };
