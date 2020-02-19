@@ -15,7 +15,7 @@ const withData = (View, getData) => {
 
 
     fetchMoreData = () => {
-      
+
       getData(this.state.page)
         .then((data) => {
           this.setState(state => ({
@@ -23,7 +23,8 @@ const withData = (View, getData) => {
             page: state.page + 1
           }))
         });
-    }
+
+    };
 
     render() {
       const { data } = this.state;

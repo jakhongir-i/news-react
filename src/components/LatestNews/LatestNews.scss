@@ -11,13 +11,16 @@
     margin-bottom: 16px;
   }
 }
-
+a {
+  text-decoration: none;
+}
 .latest-news-card {
   display: flex;
   border-radius: 8px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, .1);
   border: solid 0 rgba(0, 0, 0, .09);
   background-color: #fff;
+
 
   &__image {
     max-width: 105px;

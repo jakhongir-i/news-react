@@ -23,7 +23,6 @@ class TopNews extends Component {
       lazy: true
     };
 
-
     const { data } = this.props;
 
     return (
@@ -31,6 +30,7 @@ class TopNews extends Component {
         <h2>Top News</h2>
 
         <div className='top-news__slider'>
+
           <Swiper {...params}>
             { data.map((news, i) => {
               return (

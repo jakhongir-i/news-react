@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './style.scss';
 import Header from '../Header/';
-import TopNews from "../TopNews";
-import LatestNews from "../LatestNews";
+import { HomePage, NewsPage } from '../Pages'
+
 
 export default class App extends Component {
   render() {
 
     return (
       <div className='app'>
-        <Header />
-        <main className='main'>
-          <div className="container">
-
-            <TopNews />
-            <LatestNews />
-          </div>
-        </main>
+        <Router >
+          <Route path='/' component={HomePage} exact/>
+          <Route path='/news' component={NewsPage}/>
+        </Router>
       </div>
     )
   }

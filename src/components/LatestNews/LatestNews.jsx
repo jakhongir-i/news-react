@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import './LatestNews.scss'
+import './LatestNews.scss';
 import NewsApi from "../../api/news-api";
 import withData from "../HOC-helpers/with-data";
-import moment from 'moment'
-import NoPhoto from '../../no-image.gif'
+import moment from 'moment';
+import NoPhoto from '../../no-image.gif';
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ReactComponent as Spinner} from './spinner.svg'
-
+import {ReactComponent as Spinner} from './spinner.svg';
+import { Link } from "react-router-dom";
 
 const newsApi = new NewsApi();
 const { getLatestNews } = newsApi;
@@ -17,6 +17,7 @@ class LatestNews extends Component {
 
 
     const { data, fetchMoreData } = this.props;
+    console.log('DATA---', data)
 
     return (
       <div className='latest-news'>
@@ -38,6 +39,7 @@ class LatestNews extends Component {
             data.map((item, i) => {
               return (
                 <li className='latest-news__list-item' key={i}>
+                <Link to='/news'>
                   <div className="latest-news-card">
                     <div className="latest-news-card__image">
                       <img src={item.urlToImage ? item.urlToImage : NoPhoto } alt="" />
@@ -50,6 +52,7 @@ class LatestNews extends Component {
                       </div>
                     </div>
                   </div>
+                </Link>
                 </li>
               )
             })

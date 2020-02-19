@@ -1,0 +1,61 @@
+.news {
+  position: relative;
+
+  &__main {
+    box-shadow: 0 10px 20px -20px rgba(0, 0, 0, .5);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    padding: 16px;
+  }
+
+  &__image {
+    width: 100%;
+    border-bottom-left-radius: 8px ;
+    border-bottom-right-radius: 8px ;
+    overflow: hidden;
+
+    img {
+      max-width: 100%;
+      display: block;
+
+    }
+  }
+
+  h3 {
+    margin-bottom: 8px;
+    color: #4A6482;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .back {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    top: 25px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    background: #fff url("chevron-right.svg") no-repeat center;
+    cursor: pointer;
+  }
+
+
+  &__full-text {
+    padding: 0 16px;
+  }
+  &__author-name {
+    color: #5297FF;
+  }
+
+  &__published-date {
+    color: #bcbcbc;
+  }
+}
