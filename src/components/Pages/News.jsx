@@ -1,27 +1,38 @@
 import React from 'react';
 import './Pages.scss'
+import { withRouter } from 'react-router-dom';
+import moment from "moment";
 
-export default function NewsPage() {
+
+function NewsPage(props) {
+  console.log(props);
+  const {state: news} = props.location;
+
+
+  const {urlToImage = 'Image no avaible', title, publishedAt, content, source} = news;
+
   return (
     <div className="container">
       <div className="news">
-        <span className='back'/>
+        <button className='back' onClick={() => props.history.goBack()}/>
         <div className="news__main">
           <div className="news__image">
-            <img src="https://i.picsum.photos/id/75/500/300.jpg" alt=""/>
+            <img src={urlToImage} alt=""/>
           </div>
           <div className="news__title">
-            <h3>New Microsoft Browser Combats Crypto Mining Malware</h3>
+            <h3>{title}</h3>
             <div className="row">
-              <span className="news__author-name">Anonymus</span>
-              <span className="news__published-date">FEB 01, 2020</span>
+              <span className="news__author-name">{source.name}</span>
+              <span className="news__published-date">{moment(publishedAt).format('MMM DD.YYYY')}</span>
             </div>
           </div>
         </div>
         <p className="news__full-text">
-          Microsoft recently released the first full version of its chromium-based browser Microsoft Edge with several design improvements. For example, it brings new security features to protect users from automatically downloading unwanted apps, such as adware and other malicious programs that harm a user’s PC.
+          {content}
         </p>
       </div>
     </div>
   )
 }
+
+export default withRouter(NewsPage)

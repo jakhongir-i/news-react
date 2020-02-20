@@ -38,13 +38,14 @@
   .back {
     position: absolute;
     border-radius: 50%;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     top: 25px;
     left: 16px;
     width: 44px;
     height: 44px;
     background: #fff url("chevron-right.svg") no-repeat center;
     cursor: pointer;
+    border: none;
   }
 
 

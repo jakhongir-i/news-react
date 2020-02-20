@@ -39,7 +39,12 @@ class LatestNews extends Component {
             data.map((item, i) => {
               return (
                 <li className='latest-news__list-item' key={i}>
-                <Link to='/news'>
+                <Link
+                  to={{
+                    pathname: `/news/${i}`,
+                    state: item
+                  }}
+                >
                   <div className="latest-news-card">
                     <div className="latest-news-card__image">
                       <img src={item.urlToImage ? item.urlToImage : NoPhoto } alt="" />
