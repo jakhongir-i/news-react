@@ -5,6 +5,8 @@ import './TopNews.scss';
 import withData from "../HOC-helpers/with-data";
 import NewsApi from "../../api/news-api";
 import NoPhoto from '../../no-image.gif'
+import { Link } from "react-router-dom";
+
 
 const newsApi = new NewsApi();
 
@@ -34,12 +36,19 @@ class TopNews extends Component {
           <Swiper {...params}>
             { data.map((news, i) => {
               return (
-                <div key={i}>
-                  <div className="top-news-card">
-                    <img src={news.urlToImage ? news.urlToImage : NoPhoto} alt="" className='top-news-card__image'/>
-                    <p className='top-news-card__title'>{news.title}</p>
+                <Link
+                  to={{
+                    pathname: `/news/${i}`,
+                    state: news
+                }}>
+                  <div key={i}>
+                    <div className="top-news-card">
+                      <img src={news.urlToImage ? news.urlToImage : NoPhoto} alt="" className='top-news-card__image'/>
+                      <p className='top-news-card__title'>{news.title}</p>
+                    </div>
                   </div>
-                </div>
+
+                </Link>
                 )
               })
             }
